@@ -1,7 +1,24 @@
-import PIL
+
+
+
+import os
+from PIL import Image
+
+
+#def console():
+#    print("Type copy to copy to clipboard your ascii text\nType 'quit' to close the program\n\nMade by Mattia Raffaele :)")
+#    code = input()
+#    
+#    if code == "copy":
+#        fh = open("_TXT/" + artName)
+
+
+
+
+
 
 # ascii characters used to build the output text
-ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
+ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "." , "a"]
 
 # resize image according to a new width
 def resize_image(image, new_width=100):
@@ -26,10 +43,10 @@ def main(new_width=100):
     # attempt to open image from user-input
     path = input("Enter a valid pathname to an image:\n")
     try:
-        image = PIL.Image.open(path)
+        image = Image.open(path)
     except:
         print(path, " is not a valid pathname to an image.")
-        return
+        return()
   
     # convert image to ascii    
     new_image_data = pixels_to_ascii(grayify(resize_image(image)))
@@ -42,8 +59,14 @@ def main(new_width=100):
     print(ascii_image)
     
     # save result to "ascii_image.txt"
-    with open("ascii_image.txt", "w") as f:
+    with open("_TXT/ascii_image.txt", "w") as f:
         f.write(ascii_image)
+
+    print("Give a name to your artwork")
+    artName = input()
+    os.rename("_TXT/ascii_image.txt" , "_TXT/" + artName)
+    console()
+    
  
 # run program
 main()
