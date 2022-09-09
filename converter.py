@@ -3,6 +3,7 @@
 
 import os
 from PIL import Image
+from colorama import Fore
 
 
 #def console():
@@ -18,7 +19,7 @@ from PIL import Image
 
 
 # ascii characters used to build the output text
-ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "." , "a"]
+ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "." , "\\"]
 
 # resize image according to a new width
 def resize_image(image, new_width=100):
@@ -41,31 +42,35 @@ def pixels_to_ascii(image):
 
 def main(new_width=100):
     # attempt to open image from user-input
-    path = input("Enter a valid pathname to an image:\n")
-    try:
-        image = Image.open(path)
-    except:
-        print(path, " is not a valid pathname to an image.")
-        return()
-  
-    # convert image to ascii    
-    new_image_data = pixels_to_ascii(grayify(resize_image(image)))
-    
-    # format
-    pixel_count = len(new_image_data)  
-    ascii_image = "\n".join([new_image_data[index:(index+new_width)] for index in range(0, pixel_count, new_width)])
-    
-    # print result
-    print(ascii_image)
-    
-    # save result to "ascii_image.txt"
-    with open("_TXT/ascii_image.txt", "w") as f:
-        f.write(ascii_image)
+    print(Fore.RED + "Your image MUST be copyright free, you will be responsible for all legal actions that the author of the image will make, type I confirm to accept")
+    confirm = input(Fore.WHITE)
+    if confirm == "I confirm":
 
-    print("Give a name to your artwork")
-    artName = input()
-    os.rename("_TXT/ascii_image.txt" , "_TXT/" + artName)
-    console()
+        path = input("\nEnter a valid pathname to an image:\n")
+        try:
+            image = Image.open(path)
+        except:
+            print(path, " is not a valid pathname to an image.")
+            return()
+    
+        # convert image to ascii    
+        new_image_data = pixels_to_ascii(grayify(resize_image(image)))
+        
+        # format
+        pixel_count = len(new_image_data)  
+        ascii_image = "\n".join([new_image_data[index:(index+new_width)] for index in range(0, pixel_count, new_width)])
+        
+        # print result
+        print(ascii_image)
+        
+        # save result to "ascii_image.txt"
+        with open("TXT/ascii_image.txt", "w") as f:
+            f.write(ascii_image)
+
+        print("Give a name to your artwork")
+        artName = input()
+        os.rename("TXT/ascii_image.txt" , "TXT/" + artName + ".txt")
+        #console()
     
  
 # run program

@@ -1,0 +1,14 @@
+{
+    "json":
+    [
+        {
+            "pathtxt": "TXT/car.txt",
+            "keyword": "car"
+        },
+        
+        {
+            "pathtxt": "TXT/mountains.txt",
+            "keyword": "mountain"
+        }
+    ]
+}
